@@ -15,29 +15,45 @@ public class Main {
 				+ "criado para fornecer informações e conversas de suporte. "
 				+ "\nEle não substitui o atendimento psicológico ou psiquiátrico profissional.");
 		
-		System.out.print("\n\nDigite seu Nome: ");
-		String nome = scanner.nextLine();
-		
-		Usuario usuario = new Usuario(nome);
-		ProcessadorMensagem ia = new IA();
-		Chat chat = new Chat(usuario, ia);
-		
-		System.out.println("\nChat iniciado! Digite 'sair' para encerrar o atendimento");
-		
-		while (true) {
-			System.out.print("\nVoce: ");
-			String entrada = scanner.nextLine();
-			
-			if(entrada.equalsIgnoreCase("sair")) {
-				break;
+		try {
+			String nome = "";
+			while (nome.trim().isEmpty()) {
+				System.out.print("\n\nDigite seu Nome: ");
+				nome = scanner.nextLine();
+				
+				if (nome.trim().isEmpty()) {
+					System.out.println("Nome nao pode ser vazio. Tente Novamente. ");
+				}
 			}
+			Usuario usuario = new Usuario(nome);
+			ProcessadorMensagem ia = new IA();
+			Chat chat = new Chat(usuario, ia);
 			
-			chat.enviarMensagem(entrada, "neutro");
+			System.out.println("\nChat iniciado! Digite 'sair' para encerrar o atendimento");
 			
-		}
+			while (true) {
+				System.out.print("\nVoce: ");
+				String entrada = scanner.nextLine();
+				
+				if(entrada.equalsIgnoreCase("sair")) {
+					break;
+				}
+				
+				if (entrada == null || entrada.trim() .isEmpty() ) {
+					System.out.println("Por favor, digite alguma mensagem.");
+					continue;
+				}
+				
+				chat.enviarMensagem(entrada, "neutro");
+				
+			}
 		
-		scanner.close();
-		System.out.println("Encerrado");
+		}catch (Exception e) {
+	            System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
+		} finally {
+	            scanner.close();
+	            System.out.println("Atendimento encerrado. Cuide-se! 💙");
+		}
 	}
 
 }
