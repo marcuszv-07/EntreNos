@@ -1,17 +1,16 @@
 package model;
 
-public class ServicoSaude {
-	private String servico;
+public class ServicoSaude extends Servico {
 	private String telefone;
 	
-	public ServicoSaude(String servico, String telefone) {
-		this.servico = servico;
+	public ServicoSaude(String nome, String telefone) {
+		super(nome);
 		this.telefone = telefone;
 		
 	}
 	
-	public void exibirServico() {
-		System.out.print(servico+ " - Contato: "+ telefone);
+	@Override
+	public String exibirServico() {
+		return nome + " - Contato: " + telefone;
 	}
-
 }

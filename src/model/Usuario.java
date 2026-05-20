@@ -14,4 +14,8 @@ public class Usuario {
 	public Mensagem enviarMensagem(String texto) {
 		return new Mensagem(texto, this);
 	}
+	
+	public Mensagem enviarMensagem(String texto, String emocao) {
+		return new Mensagem (texto + "(" + emocao + ")", this);
+	}
 }
